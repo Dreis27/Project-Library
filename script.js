@@ -1,5 +1,9 @@
 let myLibrary = [    { title: "Book 1", author: "Author 1", pages: 300, read: true },
-{ title: "Book 2", author: "Author 2", pagesC: 250, read: false }];
+{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
+{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
+{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
+{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
+{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },];
 
 function Book (title, author, pages, read) {
     this.title = title;
@@ -53,6 +57,31 @@ function addBookToLibrary(book){
             container.appendChild(bookDiv);
         });
     }
+
+document.getElementById('addBookBtn').addEventListener('click', function() {
+    document.getElementById('bookFormPopup').style.display = 'block';
+});
+
+document.getElementById('closePopupBtn').addEventListener('click', function() {
+    document.getElementById('bookFormPopup').style.display = 'none';
+});
+
+document.getElementById('bookForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const newBook = {
+        title: document.getElementById('bookTitle').value,
+        author: document.getElementById('bookAuthor').value,
+        pagesCount: parseInt(document.getElementById('bookPages').value, 10),
+        read: document.getElementById('bookRead').checked
+    };
+
+    addBookToLibrary(newBook);
+
+    document.getElementById('booksContainer').innerHTML = ''; 
+    displayBooks(myLibrary); 
+    document.getElementById('bookFormPopup').style.display = 'none';
+});
 
 
 displayBooks(myLibrary);

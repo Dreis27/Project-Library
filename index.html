@@ -13,8 +13,24 @@
             <h1>Library</h1>
         </div>
     </header>
-    <div class="add-btn">
-        <button class="add">+ Add book</button>
+    <button id="addBookBtn">Add Book</button>
+
+    <div id="bookFormPopup" class="popup">
+        <div class="popup-content">
+            <span id="closePopupBtn">&times;</span>
+            <h2>Add New Book</h2>
+            <form id="bookForm">
+                <label for="bookTitle">Title:</label>
+                <input type="text" id="bookTitle" required>
+                <label for="bookAuthor">Author:</label>
+                <input type="text" id="bookAuthor" required>
+                <label for="bookPages">Pages:</label>
+                <input type="number" id="bookPages" required>
+                <label for="bookRead">Read:</label>
+                <input type="checkbox" id="bookRead">
+                <button type="submit">Complete</button>
+            </form>
+        </div>
     </div>
     <div class="books-grid" id="booksContainer"></div>
 
