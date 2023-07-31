@@ -1,0 +1,46 @@
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.book {
+   
+    border: 1px solid #ccc;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-title {
+    font-weight: bold;
+}
+
+.book-author, .book-pages {
+    margin-top: 8px;
+}
+
+.book-read {
+    background-color: #e7f8e4; /* Light green background for read books */
+}
+
+.book-unread {
+    background-color: #ffe4e4; /* Light red background for unread books */
+}
+
+.read-button {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.read-button.read {
+    background-color: #4CAF50; /* Green background for read status */
+    color: white;
+}
+
+.read-button.unread {
+    background-color: #F44336; /* Red background for unread status */
+    color: white;
+}
