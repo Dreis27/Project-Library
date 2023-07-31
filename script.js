@@ -1,9 +1,4 @@
-let myLibrary = [    { title: "Book 1", author: "Author 1", pages: 300, read: true },
-{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
-{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
-{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
-{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },
-{ title: "Book 2", author: "Author 2", pagesC: 250, read: false },];
+let myLibrary = [];
 
 function Book (title, author, pages, read) {
     this.title = title;
@@ -17,49 +12,63 @@ function addBookToLibrary(book){
     myLibrary.unshift(book);
 }
 
-    function displayBooks(booksArray) {
-        const container = document.getElementById('booksContainer');
+function displayBooks(booksArray) {
+    const container = document.getElementById('booksContainer');
+    container.innerHTML = ''; 
     
-        booksArray.forEach((book, index) => {
-            const bookDiv = document.createElement('div');
-            bookDiv.className = 'book';
+    booksArray.forEach((book, index) => {
+        const bookDiv = document.createElement('div');
+        bookDiv.className = 'book';
     
-            const title = document.createElement('div');
-            title.className = 'book-title';
-            title.textContent = book.title;
+        const title = document.createElement('div');
+        title.className = 'book-title';
+        title.textContent = book.title;
     
-            const author = document.createElement('div');
-            author.className = 'book-author';
-            author.textContent = "Author: " + book.author;
+        const author = document.createElement('div');
+        author.className = 'book-author';
+        author.textContent = "Author: " + book.author;
     
-            const pages = document.createElement('div');
-            pages.className = 'book-pages';
-            pages.textContent = "Pages: " + book.pages;
+        const pages = document.createElement('div');
+        pages.className = 'book-pages';
+        pages.textContent = "Pages: " + book.pages;
     
-            const readButton = document.createElement('button');
-            readButton.className = `read-button ${book.read ? 'read' : 'unread'}`;
-            readButton.textContent = book.read ? "Read" : "Unread";
+        const readButton = document.createElement('button');
+        readButton.className = `read-button ${book.read ? 'read' : 'unread'}`;
+        readButton.textContent = book.read ? "Read" : "Unread";
             
-            readButton.addEventListener('click', function() {
+        readButton.addEventListener('click', function() {
 
-                myLibrary[index].read = !myLibrary[index].read;
+            myLibrary[index].read = !myLibrary[index].read;
 
-                readButton.classList.toggle('read');
-                readButton.classList.toggle('unread');
-                readButton.textContent = myLibrary[index].read ? "Read" : "Unread";
+            readButton.classList.toggle('read');
+            readButton.classList.toggle('unread');
+            readButton.textContent = myLibrary[index].read ? "Read" : "Unread";
             });
+
+        const removeButton = document.createElement('button');
+        removeButton.className = 'removeBtn';
+        removeButton.textContent = "Delete book";
+        removeButton.addEventListener('click', function() {
+            myLibrary.splice(index, 1);
+            displayBooks(myLibrary);
+        });
+
     
-            bookDiv.appendChild(title);
-            bookDiv.appendChild(author);
-            bookDiv.appendChild(pages);
-            bookDiv.appendChild(readButton);
+        bookDiv.appendChild(title);
+        bookDiv.appendChild(author);
+        bookDiv.appendChild(pages);
+        bookDiv.appendChild(readButton);
+        bookDiv.appendChild(removeButton);
             
-            container.appendChild(bookDiv);
+        container.appendChild(bookDiv);
         });
     }
 
 document.getElementById('addBookBtn').addEventListener('click', function() {
     document.getElementById('bookFormPopup').style.display = 'block';
+
+    const form = document.getElementById('bookForm');
+    form.reset();
 });
 
 document.getElementById('closePopupBtn').addEventListener('click', function() {
@@ -72,7 +81,7 @@ document.getElementById('bookForm').addEventListener('submit', function(e) {
     const newBook = {
         title: document.getElementById('bookTitle').value,
         author: document.getElementById('bookAuthor').value,
-        pagesCount: parseInt(document.getElementById('bookPages').value, 10),
+        pages: parseInt(document.getElementById('bookPages').value, 10),
         read: document.getElementById('bookRead').checked
     };
 
